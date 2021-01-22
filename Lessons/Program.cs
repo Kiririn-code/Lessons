@@ -13,7 +13,7 @@ namespace Lessons
 
             Console.WriteLine("ВВедите количество жизней");
             int health = int.Parse(Console.ReadLine());
-            Console.WriteLine("Введите количество брони");
+            Console.WriteLine("Введите количество брони ");
             int armor = int.Parse(Console.ReadLine());
             Console.WriteLine("Введите количество урона");
             int damage = int.Parse(Console.ReadLine());

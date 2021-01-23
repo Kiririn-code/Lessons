@@ -17,8 +17,8 @@ namespace Lessons
 
             Console.Write("Добрый день,введите количество старушек ");
             grannyCount = Convert.ToInt32(Console.ReadLine());
-            waitingHours = (grannyCount * 10) / 60;
-            waitingMinute = (grannyCount * 10) % 60;
+            waitingHours = (grannyCount * receptionTime) / 60;
+            waitingMinute = (grannyCount * receptionTime) % 60;
 
             Console.WriteLine("Вы простоите в очереди "+waitingHours +" часа(-ов) и " + waitingMinute+" минут");
         }

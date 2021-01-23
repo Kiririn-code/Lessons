@@ -12,7 +12,7 @@ namespace Lessons
         {
             int grannyCount = 0;
             int waitingHours = 0;
-            int waitingMinute;
+            int waitingMinute = 0;
             int receptionTime = 10;
 
             Console.Write("Добрый день,введите количество старушек ");
@@ -21,9 +21,6 @@ namespace Lessons
             waitingMinute = (grannyCount * 10) % 60;
 
             Console.WriteLine("Вы простоите в очереди "+waitingHours +" часа(-ов) и " + waitingMinute+" минут");
-
-
-
         }
     }
 }

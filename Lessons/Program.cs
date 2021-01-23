@@ -10,24 +10,20 @@ namespace Lessons
     {
         static void Main(string[] args)
         {
+            int grannyCount = 0;
+            int waitingHours = 0;
+            int waitingMinute;
+            int receptionTime = 10;
 
-            Console.WriteLine("ВВедите количество жизней");
-            int health = int.Parse(Console.ReadLine());
-            Console.WriteLine("Введите количество брони ");
-            int armor = int.Parse(Console.ReadLine());
-            Console.WriteLine("Введите количество урона");
-            int damage = int.Parse(Console.ReadLine());
-            var result = getDamage(health, armor, damage);
-            Console.WriteLine($"Вы получили {result} урона");
-            if(result>=health)
-                Console.WriteLine("Вы погибли");
-            else Console.WriteLine($"У Вас осталось {health-result} жизней");
+            Console.Write("Добрый день,введите количество старушек ");
+            grannyCount = Convert.ToInt32(Console.ReadLine());
+            waitingHours = (grannyCount * 10) / 60;
+            waitingMinute = (grannyCount * 10) % 60;
 
-       }
-        public static float getDamage(int Health, int Armor, int Damage)
-        {
-            float lostHealth = Damage/100f * Armor;
-            return lostHealth;
+            Console.WriteLine("Вы простоите в очереди "+waitingHours +" часа(-ов) и " + waitingMinute+" минут");
+
+
+
         }
     }
 }

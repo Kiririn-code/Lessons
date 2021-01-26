@@ -25,16 +25,17 @@ namespace Lessons
                 Console.WriteLine("Чтобы выйти из программы введите - exit");
                 Console.WriteLine("Чтобы узнать дату введите - time");
                 Console.WriteLine("Чтобы вывести инофрмацию о себе введите - info");
+                Console.WriteLine("Чтобы вывести список команд введите - help");
 
                 userChoise = Console.ReadLine();
 
+                Console.Clear();
                 switch (userChoise)
                 {
                     case ("setpassword"):
                         Console.Write("Введите новый пароль: ");
                         userPassword = Console.ReadLine();
                         Console.WriteLine("Новый пароль: " + userPassword);
-                        Console.Clear();
                         break;
 
                     case ("changecolor"):;
@@ -51,15 +52,12 @@ namespace Lessons
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.ForegroundColor = ConsoleColor.Blue;
                         }
-                        Console.Clear();
                     break;
 
                     case ("setinfo"):
                         Console.Write("Введите ваше имя: ");
                         userFirstName = Console.ReadLine();
                         Console.WriteLine("Введите ваш возраст: ");
-                        userAge = Convert.ToInt32(Console.ReadLine());
-                        Console.Clear();
                         break;
 
                     case ("info"):
@@ -73,26 +71,34 @@ namespace Lessons
                             Console.WriteLine("Вас зовут " + userFirstName + " и вам " + userAge + " лет");
                         }
                         Console.ReadKey();
-                        Console.Clear();
                         break;
 
                     case ("exit"):
                             isProgramExit = false;
-                        Console.Clear();
                         break;
 
                     case ("time"):
                         Console.WriteLine("Сегодня: " + DateTime.Today);
                         Console.ReadKey();
-                        Console.Clear();
+                        break;
+
+                    case ("help"):
+                        Console.WriteLine("Чтобы установить пароль введите - setpassword");
+                        Console.WriteLine("Чтобы изменить цвет консоли введите - changecolor");
+                        Console.WriteLine("Чтобы заполнить информацию о себе введите - setinfo");
+                        Console.WriteLine("Чтобы выйти из программы введите - exit");
+                        Console.WriteLine("Чтобы узнать дату введите - time");
+                        Console.WriteLine("Чтобы вывести инофрмацию о себе введите - info");
+                        Console.WriteLine("Чтобы вывести список команд введите - help");
+                        Console.ReadKey();
                         break;
 
                     default:
                         Console.WriteLine("Я не знаю такой команды,попробуйте еще раз");
                         Console.ReadKey();
-                        Console.Clear();
                         break;
                 }
+                Console.Clear();
             }
             Console.WriteLine("Всего ХО-РО-ШЕ-ГО");
         }

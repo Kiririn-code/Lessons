@@ -13,27 +13,34 @@ namespace Lessons
             string userChoise = "";
             string userPassword = "";
             bool isProgramExit = true;
+            string userFirstName = "";
+            int userAge =0;
+
             while (isProgramExit)
             {
                 Console.WriteLine("Добрый День,вы находитесь в главном меню,чтобы: ");
-                Console.WriteLine("Чтобы установить пароль введите - setpasswd");
+                Console.WriteLine("Чтобы установить пароль введите - setpassword");
                 Console.WriteLine("Чтобы изменить цвет консоли введите - changecolor");
-                Console.WriteLine("Чтобы вывести список команд введите  - help");
+                Console.WriteLine("Чтобы заполнить информацию о себе введите - setinfo");
                 Console.WriteLine("Чтобы выйти из программы введите - exit");
                 Console.WriteLine("Чтобы узнать дату введите - time");
+                Console.WriteLine("Чтобы вывести инофрмацию о себе введите - info");
 
                 userChoise = Console.ReadLine();
+
                 switch (userChoise)
                 {
-                    case ("setpasswd"):
+                    case ("setpassword"):
                         Console.Write("Введите новый пароль: ");
                         userPassword = Console.ReadLine();
                         Console.WriteLine("Новый пароль: " + userPassword);
                         Console.Clear();
                         break;
+
                     case ("changecolor"):;
                         Console.Write("Чтобы изменить цвет консоли введите пароль: ");
                         string userInput = Console.ReadLine();
+
                         if (userInput !=userPassword ||userPassword == "")
                         {
                             Console.WriteLine("Пароль не верный,либо пароль не установлен");
@@ -46,28 +53,40 @@ namespace Lessons
                         }
                         Console.Clear();
                     break;
-                    case ("help"):
-                        Console.WriteLine("Чтобы устанвить пароль введите - setpasswd");
-                        Console.WriteLine("Чтобы изменить цвет консоли введите - changecolor");
-                        Console.WriteLine("Чтобы вывести список команд введите  - help");
-                        Console.WriteLine("Чтобы выйти из программы введите - exit");
-                        Console.WriteLine("Чтобы узнать дату введите - time");
+
+                    case ("setinfo"):
+                        Console.Write("Введите ваше имя: ");
+                        userFirstName = Console.ReadLine();
+                        Console.WriteLine("Введите ваш возраст: ");
+                        userAge = Convert.ToInt32(Console.ReadLine());
                         Console.Clear();
                         break;
-                    case ("exit"):
-                        Console.WriteLine("Вы уверены,что хотите выйти из программы - Y/N");
-                        string userAnswer = Console.ReadLine();
-                        if (userAnswer =="y" ||userAnswer =="Y")
+
+                    case ("info"):
+
+                        if(userAge==0 || userFirstName =="")
                         {
-                            isProgramExit = false;
+                            Console.WriteLine("мы ничего не знаем о Вас,простите");
                         }
+                        else
+                        {
+                            Console.WriteLine("Вас зовут " + userFirstName + " и вам " + userAge + " лет");
+                        }
+                        Console.ReadKey();
                         Console.Clear();
                         break;
+
+                    case ("exit"):
+                            isProgramExit = false;
+                        Console.Clear();
+                        break;
+
                     case ("time"):
                         Console.WriteLine("Сегодня: " + DateTime.Today);
                         Console.ReadKey();
                         Console.Clear();
                         break;
+
                     default:
                         Console.WriteLine("Я не знаю такой команды,попробуйте еще раз");
                         Console.ReadKey();

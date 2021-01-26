@@ -10,17 +10,19 @@ namespace Lessons
     {
         static void Main(string[] args)
         {
-            int grannyCount = 0;
-            int waitingHours = 0;
-            int waitingMinute = 0;
-            int receptionTime = 10;
-
-            Console.Write("Добрый день,введите количество старушек ");
-            grannyCount = Convert.ToInt32(Console.ReadLine());
-            waitingHours = (grannyCount * receptionTime) / 60;
-            waitingMinute = (grannyCount * receptionTime) % 60;
-
-            Console.WriteLine("Вы простоите в очереди "+waitingHours +" часа(-ов) и " + waitingMinute+" минут");
+            string userName;
+            char frameChar;
+            string charLine = "";
+            Console.Write("Добрый день,введите свое имя ");
+            userName = Console.ReadLine();
+            Console.Write("Введите символ для рамки: ");
+            frameChar = Convert.ToChar(Console.ReadLine());
+            for (int i = 0; i < (userName.Length+2); i++)
+            {
+                charLine +=Convert.ToString(frameChar);
+            }
+           
+            Console.WriteLine(charLine+'\n'+(frameChar+userName+frameChar)+'\n'+charLine);
         }
     }
 }

@@ -21,15 +21,15 @@ namespace Lessons
             float howlBust = 1.2f;
             bool isHowlExist = false;
             bool isGameContinue = true;
-            Random ob = new Random();
+            Random random = new Random();
 
             Console.WriteLine("Перед вами великий и ужасный Колормочу,обладающий "+ bossHp+" жизней, бегите в страхе");
             Console.WriteLine("Темный маг Дарыгер - у вас имеется "+ heroHp +" жизней \nПобедите Колормочу чтобы спасти принцессу");
 
             while (isGameContinue)
             {
-                heroAttack = ob.Next(30, 50);
-                bossAttack = ob.Next(60, 80);
+                heroAttack = random.Next(30, 50);
+                bossAttack = random.Next(60, 80);
                 Console.WriteLine("Список способностей: ");
                 Console.WriteLine("1 - Чындык кылычы - ударить босса священным мечом");
                 Console.WriteLine("2 - Боорукер арбак - призвать на помощь духа предков,сила атаки возрастает на 20 процентов");
@@ -44,7 +44,6 @@ namespace Lessons
                     case 1:
                         heroAttack = holySword;
                         break;
-
                     case 2:
                         if (howlLifetime == 0)
                         {
@@ -57,21 +56,19 @@ namespace Lessons
                             Console.WriteLine("Добрый дух уже призван, и будет жить еще "+ howlLifetime+" ходов");
                         }
                         break;
-
                     case 3:
                         if (isHowlExist)
                         {
-                            heroHp += ob.Next(50,100);
-                            Console.WriteLine("Вас подхилили,у вас "+ heroHp + "жизней");
+                            heroHp += random.Next(50,100);
+                            Console.WriteLine("Вас подхилили,у вас "+ heroHp + " жизней");
                         }
                         else
                         {
                             Console.WriteLine("Доброго духа нет на поле. \n Призовите его,чтобы иметь возможность лечиться");
                         }
                         break;
-
                     case 4:
-                        avoidAttack = ob.Next(0, 2);
+                        avoidAttack = random.Next(0, 2);
                         if (avoidAttack == 1)
                         {
                             Console.WriteLine("Вы успешно увернулись,сила атаки увеличена на 20%");
@@ -84,17 +81,15 @@ namespace Lessons
                             bossAttack *= avoidBuff;
                         }
                         break;
-
                     case 5:
                         Console.WriteLine("Вы попробовали позорно сбежать,но Колормочу почувствовал вашу слабость,и ударил вас в спину");
                         bossAttack = bossBackstab;
                         break;
-
                     default:
                         Console.WriteLine("Команда не распознанна");
                         break;
                 }
-                //Время существования призрака
+
                 if (isHowlExist)
                 {
                     howlLifetime--;
@@ -120,6 +115,11 @@ namespace Lessons
                else if(bossHp<=0)
                 {
                     Console.WriteLine("Вы одолели босса!");
+                    isGameContinue = false;
+                }
+                else if(bossHp<= 0 && heroHp<=0)
+                {
+                    Console.WriteLine("Ничья. Ваши силы равны,бой продолжался долгоие столетия,в итоге оба война пали смертью храбрых");
                     isGameContinue = false;
                 }
             }

@@ -11,18 +11,25 @@ namespace Lessons
         static void Main(string[] args)
         {
             string userName;
-            char frameChar;
+            string frameChar;
             string charLine = "";
             Console.Write("Добрый день,введите свое имя ");
             userName = Console.ReadLine();
             Console.Write("Введите символ для рамки: ");
-            frameChar = Convert.ToChar(Console.ReadLine());
-            for (int i = 0; i < (userName.Length+2); i++)
+            frameChar = Console.ReadLine();
+
+            if (frameChar.Length > 1)
             {
-                charLine +=Convert.ToString(frameChar);
+                Console.WriteLine("Вы ввели слишком много символов");
             }
-           
-            Console.WriteLine(charLine+'\n'+(frameChar+userName+frameChar)+'\n'+charLine);
+            else
+            {
+                for (int i = 0; i < (userName.Length + 2); i++)
+                {
+                    charLine += frameChar;
+                }
+             Console.WriteLine(charLine + '\n' + (frameChar + userName + frameChar) + '\n' + charLine);
+            }
         }
     }
 }

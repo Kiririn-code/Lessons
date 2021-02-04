@@ -10,19 +10,27 @@ namespace Lessons
     {
         static void Main(string[] args)
         {
-            int userGold;
-            int userCrystal = 0;
-            int crystalPrice = 30;
-            bool isChangePossible;
-            Console.Write("Введите количество золота: ");
-            userGold = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Добрый день,курс золота к кристаллам =  "+crystalPrice+ "\nСколько хотите приобрести? ");
-            userCrystal = Convert.ToInt32(Console.ReadLine());
-            isChangePossible = userCrystal * crystalPrice <= userGold;
-            int changeFactor = Convert.ToInt32(isChangePossible);
-            userCrystal *= changeFactor;
-            userGold -= crystalPrice * userCrystal;
-            Console.WriteLine("У вас - " + userCrystal + " кристалов и "+ userGold + " золота");
+            int[] array = { 1, 2, 3, 4, 5, 6, 7, 8 };
+            Shuffle(array);
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.WriteLine(array[i]);
+            }
+        }
+        static void Shuffle(int[] array)
+        {
+            Random random = new Random(); 
+
+            for (int i = array.Length - 1; i >= 1; i--)
+            {
+                int tempVar;
+                int tempRandom;
+                tempRandom = random.Next(i);
+                tempVar = array[tempRandom];
+                array[tempRandom] = array[i];
+                array[i] = tempVar;
+            }
         }
     }
 }

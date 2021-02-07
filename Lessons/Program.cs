@@ -72,6 +72,7 @@ namespace Lessons
             tempPost[tempPost.Length - 1] = Console.ReadLine();
             post = tempPost;
         }
+
         static void FindData(string[] personalData)
         {
             Console.Write("Введите фамилию сотрудника ");
@@ -83,10 +84,9 @@ namespace Lessons
                 {
                     Console.WriteLine($"Сотрудник найден прод номером {i + 1}");
                 }
-                else
-                    continue;
             }
         }
+
         static void DeleteData(ref string[] personalData, ref string[] post)
         {
             Console.Write("Введите номер ячейки,котороую хотите удалить: ");
@@ -100,6 +100,7 @@ namespace Lessons
                 }
             }
         }
+
         static void WatchData(string[] personalData, string[] post)
         {
             for (int i = 0; i < personalData.Length; i++)

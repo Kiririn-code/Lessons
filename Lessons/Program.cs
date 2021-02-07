@@ -34,7 +34,7 @@ namespace Lessons
                         WatchData(personalData, post);
                         break;
                     case "удалить":
-                        DeleteData(ref post, ref personalData);
+                        DeleteData(ref personalData, ref post);
                         break;
                     case "найти":
                         FindData(personalData);
@@ -52,25 +52,10 @@ namespace Lessons
         }
         static void AddPerson(ref string[] post,ref  string[] personalData)
         {
-            Console.Write("Введите данные сотрудника ");
-            string[] tempPersonalData = new string[personalData.Length + 1];
-
-            for (int i = 0; i < personalData.Length; i++)
-            {
-                tempPersonalData[i] = personalData[i];
-            }
-            tempPersonalData[tempPersonalData.Length - 1] = Console.ReadLine();
-            personalData = tempPersonalData;
-
-            Console.Write("Введите место работы ");
-            string[] tempPost = new string[(post.Length + 1)];
-
-            for (int i = 0; i < post.Length; i++)
-            {
-                tempPost[i] = post[i];
-            }
-            tempPost[tempPost.Length - 1] = Console.ReadLine();
-            post = tempPost;
+            Console.Write("Введите место работы: ");
+            ExpandArray(ref post);
+            Console.Write("Введите Фамилию имя отчество: ");
+            ExpandArray(ref personalData);
         }
 
         static void FindData(string[] personalData)
@@ -91,14 +76,20 @@ namespace Lessons
         {
             Console.Write("Введите номер ячейки,котороую хотите удалить: ");
             int dataNumber = int.Parse(Console.ReadLine()) - 1;
-            for (int i = 0; i <personalData.Length ; i++)
+            string[] tempArray = new string[personalData.Length - 1];
+            for (int i = dataNumber; i <tempArray.Length ; i++)
             {
-                if(i==dataNumber)
-                {
-                    personalData[i] = null;
-                    post[i] = null;
-                }
+                personalData[i] = personalData[i + 1];
+                post[i] = post[i + 1];
             }
+            personalData[personalData.Length - 1] = null;
+            post[post.Length - 1] = null;
+
+            for (int i = 0; i <tempArray.Length; i++)
+            {
+                tempArray[i] = personalData[i];
+            }
+            personalData = tempArray;
         }
 
         static void WatchData(string[] personalData, string[] post)
@@ -107,6 +98,18 @@ namespace Lessons
             {
                 Console.WriteLine($"{i+1} - ФИО - {personalData[i]} Место работы - {post[i]}");
             }
+        }
+
+        static void ExpandArray(ref string[] array)
+        {
+            string[] tempArray = new string[array.Length + 1];
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                tempArray[i] = array[i];
+            }
+            tempArray[tempArray.Length - 1] = Console.ReadLine();
+            array = tempArray;
         }
     }
 }

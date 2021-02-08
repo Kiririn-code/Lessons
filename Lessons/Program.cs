@@ -76,20 +76,8 @@ namespace Lessons
         {
             Console.Write("Введите номер ячейки,котороую хотите удалить: ");
             int dataNumber = int.Parse(Console.ReadLine()) - 1;
-            string[] tempArray = new string[personalData.Length - 1];
-            for (int i = dataNumber; i <tempArray.Length ; i++)
-            {
-                personalData[i] = personalData[i + 1];
-                post[i] = post[i + 1];
-            }
-            personalData[personalData.Length - 1] = null;
-            post[post.Length - 1] = null;
-
-            for (int i = 0; i <tempArray.Length; i++)
-            {
-                tempArray[i] = personalData[i];
-            }
-            personalData = tempArray;
+            ReduceArray(ref personalData, dataNumber);
+            ReduceArray(ref post, dataNumber);
         }
 
         static void WatchData(string[] personalData, string[] post)
@@ -109,6 +97,24 @@ namespace Lessons
                 tempArray[i] = array[i];
             }
             tempArray[tempArray.Length - 1] = Console.ReadLine();
+            array = tempArray;
+        }
+
+        static void ReduceArray(ref string[] array, int dataNumber)
+        {
+            string[] tempArray = new string[array.Length - 1];
+
+            for (int i = 0; i <tempArray.Length; i++)
+            {
+                if(i<dataNumber)
+                {
+                    tempArray[i] = array[i];
+                }
+                else
+                {
+                    tempArray[i] = array[i + 1];
+                }
+            }
             array = tempArray;
         }
     }

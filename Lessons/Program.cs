@@ -10,7 +10,7 @@ namespace Lessons
     {
         static void Main(string[] args)
         {
-            string userCoise = " ";
+            string userChoise = " ";
             bool isProgramRun = true;
             string[] post = new string[0];
             string[] personalData = new string[0];
@@ -24,8 +24,8 @@ namespace Lessons
                 Console.WriteLine("Найти - поиск сотрудника по фамилии");
                 Console.WriteLine("Выход - выйти из программы");
                 Console.Write("Введите комманду: ");
-                userCoise = Console.ReadLine();
-                switch (userCoise.ToLower())
+                userChoise = Console.ReadLine();
+                switch (userChoise.ToLower())
                 {
                     case "добавить":
                         AddPerson(ref post, ref personalData);
@@ -50,7 +50,8 @@ namespace Lessons
                 Console.Clear();
             }
         }
-        static void AddPerson(ref string[] post,ref  string[] personalData)
+
+        static void AddPerson(ref string[] post, ref string[] personalData)
         {
             Console.Write("Введите место работы: ");
             ExpandArray(ref post);

@@ -10,113 +10,61 @@ namespace Lessons
     {
         static void Main(string[] args)
         {
-            string userChoise = " ";
-            bool isProgramRun = true;
-            string[] post = new string[0];
-            string[] personalData = new string[0];
+            string userChoise;
+            bool isPrograRun = true;
+            List<string> personJob = new List<string>();
+            List<string> personData = new List<string>();
 
-            while (isProgramRun)
+            while (isPrograRun)
             {
-                Console.WriteLine("Список комманд:");
-                Console.WriteLine("Добавить - добавить новый элемент");
-                Console.WriteLine("Отобразить - список сотрудников");
-                Console.WriteLine("Удалить - удалить сотрудника из базы");
-                Console.WriteLine("Найти - поиск сотрудника по фамилии");
-                Console.WriteLine("Выход - выйти из программы");
-                Console.Write("Введите комманду: ");
                 userChoise = Console.ReadLine();
-                switch (userChoise.ToLower())
+                Console.WriteLine("Чтобы добавить данные введите - add");
+                Console.WriteLine("Чтобы удалить данные введите - remove");
+                Console.WriteLine("Чтобы отобразить данные введите - show");
+                Console.WriteLine("Чтобы выйти из программы введите - exit");
+
+                switch(userChoise)
                 {
-                    case "добавить":
-                        AddPerson(ref post, ref personalData);
+                    case "exit":
+                        isPrograRun = false;
+                        Console.WriteLine("Работа завершена");
                         break;
-                    case "отобразить":
-                        WatchData(personalData, post);
+                    case "remove":
+                        DeleteData(ref personJob, ref personData);
                         break;
-                    case "удалить":
-                        DeleteData(ref personalData, ref post);
+                    case "add":
+                        AddList(ref personJob,ref personData);
                         break;
-                    case "найти":
-                        FindData(personalData);
-                        break;
-                    case "выход":
-                        isProgramRun = false;
+                    case "show":
+                        ShowList(personJob,personData);
                         break;
                     default:
-                        Console.WriteLine("Комманда не обнаружена,повторите попытку");
+                        Console.WriteLine("Команда не распознанна");
                         break;
                 }
-                Console.ReadKey();
-                Console.Clear();
             }
         }
 
-        static void AddPerson(ref string[] post, ref string[] personalData)
+        static void AddList(ref List<string> personJob, ref List<string> personData)
         {
+            Console.Write("Введите данные пользователя: ");
+            personData.Add(Console.ReadLine());
             Console.Write("Введите место работы: ");
-            ExpandArray(ref post);
-            Console.Write("Введите Фамилию имя отчество: ");
-            ExpandArray(ref personalData);
+            personJob.Add(Console.ReadLine());
         }
 
-        static void FindData(string[] personalData)
+        static void ShowList(List<string> personJob, List<string> personData)
         {
-            Console.Write("Введите фамилию сотрудника ");
-            string surname = Console.ReadLine();
-
-            for (int i = 0; i < personalData.Length; i++)
+            for (int i = 0; i < personData.Count; i++)
             {
-                if (personalData[i].ToLower().Contains(surname))
-                {
-                    Console.WriteLine($"Сотрудник найден прод номером {i + 1}");
-                }
+                Console.WriteLine($"{i+1} - ФИО - {personData[i]} Место работы - {personJob[i]}");
             }
         }
-
-        static void DeleteData(ref string[] personalData, ref string[] post)
+        static void DeleteData(ref List<string> personJob, ref List<string> personData)
         {
-            Console.Write("Введите номер ячейки,котороую хотите удалить: ");
-            int dataNumber = int.Parse(Console.ReadLine()) - 1;
-            ReduceArray(ref personalData, dataNumber);
-            ReduceArray(ref post, dataNumber);
-        }
-
-        static void WatchData(string[] personalData, string[] post)
-        {
-            for (int i = 0; i < personalData.Length; i++)
-            {
-                Console.WriteLine($"{i+1} - ФИО - {personalData[i]} Место работы - {post[i]}");
-            }
-        }
-
-        static void ExpandArray(ref string[] array)
-        {
-            string[] tempArray = new string[array.Length + 1];
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                tempArray[i] = array[i];
-            }
-            tempArray[tempArray.Length - 1] = Console.ReadLine();
-            array = tempArray;
-        }
-
-        static void ReduceArray(ref string[] array, int dataNumber)
-        {
-            string[] tempArray = new string[array.Length - 1];
-
-            for (int i = 0; i <tempArray.Length; i++)
-            {
-                if(i<dataNumber)
-                {
-                    tempArray[i] = array[i];
-                }
-                else
-                {
-                    tempArray[i] = array[i + 1];
-                }
-            }
-            array = tempArray;
+            Console.Write("Введите номер ячейки ктороую хотите удалить: ");
+            int index = int.Parse(Console.ReadLine()) - 1;
+            personData.RemoveAt(index);
         }
     }
 }

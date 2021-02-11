@@ -22,14 +22,21 @@ namespace Lessons
 
             while (isProgramRun)
             {
+                Console.WriteLine("Чтобы выйти из программы введите - exit");
                 Console.WriteLine("Введите слово для проверки: ");
                 userWord = Console.ReadLine().ToLower();
-
-                if (vocabulary.ContainsKey(userWord))
-                    Console.WriteLine($"{userWord} - это {vocabulary[userWord]}");
-                else
-                    Console.WriteLine($"Cлово {userWord} отсутствует в нашем толковом словаре");
-
+                switch (userWord)
+                {
+                    case "exit":
+                        isProgramRun = false;
+                        break;
+                    default:
+                        if (vocabulary.ContainsKey(userWord))
+                            Console.WriteLine($"{userWord} - это {vocabulary[userWord]}");
+                        else
+                            Console.WriteLine($"Cлово {userWord} отсутствует в нашем толковом словаре");
+                        break;
+                }
                 Console.ReadKey();
                 Console.Clear();
             }

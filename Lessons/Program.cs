@@ -29,6 +29,7 @@ namespace Lessons
                 {
                     case "exit":
                         isProgramRun = false;
+                        Console.WriteLine("Завершение работы");
                         break;
                     default:
                         if (vocabulary.ContainsKey(userWord))

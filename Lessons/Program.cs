@@ -36,7 +36,7 @@ namespace Lessons
                         AddLists(personJob,personData);
                         break;
                     case "show":
-                        ShowList(personJob,personData);
+                        ShowInfo(personJob,personData);
                         break;
                     default:
                         Console.WriteLine("Команда не распознанна");
@@ -53,7 +53,7 @@ namespace Lessons
             personJob.Add(Console.ReadLine());
         }
 
-        static void ShowList(List<string> personJob, List<string> personData)
+        static void ShowInfo(List<string> personJob, List<string> personData)
         {
             for (int i = 0; i < personData.Count; i++)
             {

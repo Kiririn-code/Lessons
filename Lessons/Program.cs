@@ -30,10 +30,10 @@ namespace Lessons
                         Console.WriteLine("Работа завершена");
                         break;
                     case "remove":
-                        DeleteData(ref personJob, ref personData);
+                        DeleteData(personJob,personData);
                         break;
                     case "add":
-                        AddList(ref personJob,ref personData);
+                        AddLists(personJob,personData);
                         break;
                     case "show":
                         ShowList(personJob,personData);
@@ -45,7 +45,7 @@ namespace Lessons
             }
         }
 
-        static void AddList(ref List<string> personJob, ref List<string> personData)
+        static void AddLists(List<string> personJob,List<string> personData)
         {
             Console.Write("Введите данные пользователя: ");
             personData.Add(Console.ReadLine());
@@ -60,11 +60,12 @@ namespace Lessons
                 Console.WriteLine($"{i+1} - ФИО - {personData[i]} Место работы - {personJob[i]}");
             }
         }
-        static void DeleteData(ref List<string> personJob, ref List<string> personData)
+        static void DeleteData(List<string> personJob,List<string> personData)
         {
             Console.Write("Введите номер ячейки ктороую хотите удалить: ");
             int index = int.Parse(Console.ReadLine()) - 1;
             personData.RemoveAt(index);
+            personJob.RemoveAt(index);
         }
     }
 }

@@ -11,11 +11,11 @@ namespace Lessons
         static void Main(string[] args)
         {
             string userChoise;
-            bool isPrograRun = true;
+            bool isProgramRun = true;
             List<string> personJob = new List<string>();
             List<string> personData = new List<string>();
 
-            while (isPrograRun)
+            while (isProgramRun)
             {
                 userChoise = Console.ReadLine();
                 Console.WriteLine("Чтобы добавить данные введите - add");
@@ -26,7 +26,7 @@ namespace Lessons
                 switch(userChoise)
                 {
                     case "exit":
-                        isPrograRun = false;
+                        isProgramRun = false;
                         Console.WriteLine("Работа завершена");
                         break;
                     case "remove":

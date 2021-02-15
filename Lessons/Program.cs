@@ -12,8 +12,7 @@ namespace Lessons
         {
             string userChoise;
             bool isProgramRun = true;
-            List<string> personJob = new List<string>();
-            List<string> personData = new List<string>();
+            Dictionary<string, string> personData = new Dictionary<string, string>();
 
             while (isProgramRun)
             {
@@ -30,13 +29,13 @@ namespace Lessons
                         Console.WriteLine("Работа завершена");
                         break;
                     case "remove":
-                        DeleteData(personJob,personData);
+                        DeleteData(personData);
                         break;
                     case "add":
-                        AddLists(personJob,personData);
+                        AddLists(personData);
                         break;
                     case "show":
-                        ShowInfo(personJob,personData);
+                        ShowInfo(personData);
                         break;
                     default:
                         Console.WriteLine("Команда не распознанна");
@@ -45,27 +44,36 @@ namespace Lessons
             }
         }
 
-        static void AddLists(List<string> personJob,List<string> personData)
+        static void AddLists(Dictionary<string,string> personData)
         {
-            Console.Write("Введите данные пользователя: ");
-            personData.Add(Console.ReadLine());
-            Console.Write("Введите место работы: ");
-            personJob.Add(Console.ReadLine());
+            Console.WriteLine("Введите данные пользователя: ");
+            Console.Write("Фамилия Имя Отчество - ");
+            string personName = Console.ReadLine();
+            Console.Write("Метсо работы - ");
+            string personJob = Console.ReadLine();
+            personData.Add(personName, personJob);
         }
 
-        static void ShowInfo(List<string> personJob, List<string> personData)
+        static void ShowInfo(Dictionary<string,string> personData)
         {
-            for (int i = 0; i < personData.Count; i++)
+            foreach (var item in personData)
             {
-                Console.WriteLine($"{i+1} - ФИО - {personData[i]} Место работы - {personJob[i]}");
+                Console.WriteLine($"ФИО - {item.Key} место работы - {item.Value}");
             }
         }
-        static void DeleteData(List<string> personJob,List<string> personData)
+        static void DeleteData(Dictionary<string,string> personData)
         {
-            Console.Write("Введите номер ячейки ктороую хотите удалить: ");
-            int index = int.Parse(Console.ReadLine()) - 1;
-            personData.RemoveAt(index);
-            personJob.RemoveAt(index);
+            Console.Write("Введите ФИО человека,которого хотите удалить:  ");
+            string person = Console.ReadLine();
+            if(personData.ContainsKey(person))
+            {
+                personData.Remove(person);
+            }
+            else
+            {
+                Console.WriteLine("Error");
+            }
+
         }
     }
 }

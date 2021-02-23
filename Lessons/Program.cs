@@ -10,70 +10,62 @@ namespace Lessons
     {
         static void Main(string[] args)
         {
-            string userChoise;
-            bool isProgramRun = true;
-            Dictionary<string, string> personData = new Dictionary<string, string>();
-
-            while (isProgramRun)
-            {
-                userChoise = Console.ReadLine();
-                Console.WriteLine("Чтобы добавить данные введите - add");
-                Console.WriteLine("Чтобы удалить данные введите - remove");
-                Console.WriteLine("Чтобы отобразить данные введите - show");
-                Console.WriteLine("Чтобы выйти из программы введите - exit");
-
-                switch(userChoise)
-                {
-                    case "exit":
-                        isProgramRun = false;
-                        Console.WriteLine("Работа завершена");
-                        break;
-                    case "remove":
-                        DeleteData(personData);
-                        break;
-                    case "add":
-                        AddLists(personData);
-                        break;
-                    case "show":
-                        ShowInfo(personData);
-                        break;
-                    default:
-                        Console.WriteLine("Команда не распознанна");
-                        break;
-                }
-            }
-        }
-
-        static void AddLists(Dictionary<string,string> personData)
-        {
-            Console.WriteLine("Введите данные пользователя: ");
-            Console.Write("Фамилия Имя Отчество - ");
-            string personName = Console.ReadLine();
-            Console.Write("Метсо работы - ");
-            string personJob = Console.ReadLine();
-            personData.Add(personName, personJob);
-        }
-
-        static void ShowInfo(Dictionary<string,string> personData)
-        {
-            foreach (var item in personData)
-            {
-                Console.WriteLine($"ФИО - {item.Key} место работы - {item.Value}");
-            }
-        }
-        static void DeleteData(Dictionary<string,string> personData)
-        {
-            Console.Write("Введите ФИО человека,которого хотите удалить:  ");
-            string person = Console.ReadLine();
-            if(personData.ContainsKey(person))
-            {
-                personData.Remove(person);
-            }
-            else
-            {
-                Console.WriteLine("Error");
-            }
-
+           
         }
     }
+
+    abstract class Human
+    {
+        protected string Name;
+        protected float Health;
+        protected float Damage;
+
+        public Human(string name,float health,float damage)
+        {
+            Name = name;
+            Health = health;
+            Damage = damage;
+        }
+
+        public float GetDamage(float damage)
+        {
+            return Health -= damage;
+        }
+
+    }
+
+    class Berserk: Human
+    {
+        public Berserk(string name,float health,float damage): base(name, health, damage) { }
+    }
+
+    class Warlock: Human
+    {
+        private bool _isDemonSummon;
+        public Warlock(string name, float health, float damage) : base(name, health, damage) { }
+
+        public void SummonDemon()
+        {
+            if(_isDemonSummon == false)
+            {
+
+            }
+        }
+    }
+
+    class Priest: Human
+    {
+        public Priest(string name, float health, float damage) : base(name, health, damage) { }
+    }
+
+    class Druid: Human
+    {
+        public Druid(string name, float health, float damage) : base(name, health, damage) { }
+    }
+
+    class Begar: Human
+    {
+        public Begar(string name, float health, float damage) : base(name, health, damage) { }
+    }
+
 }

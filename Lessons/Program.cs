@@ -12,27 +12,32 @@ namespace Lessons
         static void Main(string[] args)
         {
             Aquarium aquarium = new Aquarium();
+            bool isProgramRun = true;
 
-            while (true)
+            while (isProgramRun)
             {
                 Console.WriteLine("What are your doing?");
                 Console.WriteLine("Add - add a new fish");
                 Console.WriteLine("kind - kind a fish");
+                Console.WriteLine("exit - close the program");
                 string userChoise = Console.ReadLine();
                 switch(userChoise)
                 {
                     case "add":
-                        aquarium.AddFish();
+                        aquarium.AddFishs();
                         Console.WriteLine("new fish is added");
+                        break;
+                    case "exit":
+                        isProgramRun = false;
                         break;
                     case "kind":
                         Console.Write("What kind of fish should you catch: ");
                         string nameFish = Console.ReadLine();
-                        aquarium.RemoveFish(nameFish);
+                        aquarium.RemoveFishs(nameFish);
                         break;
                 }
-                aquarium.OldnessFish();
-                aquarium.ShowFish();
+                aquarium.GrowOldFishs();
+                aquarium.ShowFishs();
             }
         }
     }
@@ -43,7 +48,7 @@ class Aquarium
 {
    private List<Fish> _fishs = new List<Fish>();
 
-    public void AddFish()
+    public void AddFishs()
     {
         Console.Write("name: ");
         string fishName = Console.ReadLine();
@@ -54,7 +59,7 @@ class Aquarium
         _fishs.Add(new Fish(fishName, fishAge,numberOfYears));
     }
 
-    public void ShowFish()
+    public void ShowFishs()
     {
         Console.Clear();
         foreach (var fish in _fishs)
@@ -64,22 +69,22 @@ class Aquarium
         }
     }
 
-    public void OldnessFish()
+    public void GrowOldFishs()
     {
         string name="";
         for (int i = 0; i < _fishs.Count; i++)
         {
-            _fishs[i].Oldness();
+            _fishs[i].GrowOld();
             if (_fishs[i].Age == _fishs[i].NumberOfYears)
             {
                 Console.WriteLine("Shit, it look like your fish is dead");
                 name = _fishs[i].Name;
             }
         }
-        RemoveFish(name);
+        RemoveFishs(name);
     }
 
-    public void RemoveFish(string name)
+    public void RemoveFishs(string name)
     {
         if (TryFindIndex(out int index,name))
             _fishs.RemoveAt(index);
@@ -93,7 +98,7 @@ class Aquarium
         for (int i = 0; i < _fishs.Count; i++)
         {
              isIndexFind = _fishs[i].Name == name;
-            if (_fishs[i].Name == name)
+            if (isIndexFind)
             {
                 index = i;
                 break;
@@ -117,7 +122,7 @@ class Fish
         NumberOfYears = numberOfYears;
     }
 
-    public void Oldness()
+    public void GrowOld()
     {
         ++Age;
     }

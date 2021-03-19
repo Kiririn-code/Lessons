@@ -17,8 +17,8 @@ namespace Lessons
 
     class WorkStation
     {
-       private Queue<Client> _clients;
-       private List<Detail> _details;
+        private Queue<Client> _clients;
+        private List<Detail> _details;
         private int _money;
         private static Random _random;
 
@@ -74,7 +74,6 @@ namespace Lessons
                 }
             }
         }
-
     }
 
     class Client
@@ -107,6 +106,5 @@ namespace Lessons
             Coast = baseOfCoast[id];
             Name = baseOfName[id];
         }
-
     }
 }

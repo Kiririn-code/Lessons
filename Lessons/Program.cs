@@ -20,21 +20,25 @@ namespace Lessons
        private Queue<Client> _clients;
        private List<Detail> _details;
         private int _money;
+        private static Random _random;
 
         public WorkStation()
         {
             _money = 10000;
             _clients = new Queue<Client>();
             _details = new List<Detail>();
+            _random = new Random();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
             {
-                _clients.Enqueue(new Client());
+                int id = _random.Next(7);
+                _clients.Enqueue(new Client(id));
             }
 
-            for (int i = 0; i < 700; i++)
+            for (int i = 0; i < 20; i++)
             {
-                _details.Add(new Detail());
+                int id = _random.Next(7);
+                _details.Add(new Detail(id));
             }
         }
 
@@ -46,24 +50,28 @@ namespace Lessons
             while(_clients.Count > 0)
             {
                 var currentClient = _clients.Dequeue();
+                Console.WriteLine($"Кажется у нас гости. Неисправность клиента - {currentClient.TypeOfBreaking}");
 
                 for (int i = 0; i < _details.Count; i++)
                 {
                     if(_details[i].Name == currentClient.TypeOfBreaking)
                     {
-                        Console.WriteLine($"Неисправность - {currentClient.TypeOfBreaking}\nЦена зп ремонт - {_details[i].Coast+coastOfRepair}");
-                        _money = _details[i].Coast + coastOfRepair;
+                        Console.WriteLine($"Деталь под замену - {_details[i].Name}\nЦена за ремонт - {_details[i].Coast+coastOfRepair}\n");
+                        _money += _details[i].Coast + coastOfRepair;
                         _details.RemoveAt(i);
+                        currentClient.DoGood();
                         break;
                     }
-                    else
-                    {
-                        Console.WriteLine("Похоже у нас нет детали,чтобы отремонтировать ваш автомобиль");
-                        _money -= fine;
-                    }
                 }
-                Console.ReadLine();
-
+                if (currentClient.IsSuccessful)
+                {
+                    Console.WriteLine($"Ремонт успешно оплачен\nСчет мастерской пополнен\nБаланс:{_money}\n");
+                }
+                else
+                {
+                    _money -= fine;
+                    Console.WriteLine($"Похоже на нашем складе нет нужной запчасти\nпридется выплатить штраф\nБаланс:{_money}\n");
+                }
             }
         }
 
@@ -72,12 +80,18 @@ namespace Lessons
     class Client
     {
         public string TypeOfBreaking { get; private set; }
-        private static Random _random = new Random();
+        public bool IsSuccessful { get; private set; }
 
-        public Client()
+        public Client(int id)
         {
+            IsSuccessful = false;
             string[] typeOfBreaking = { "Колесо", "Коробка передач", "Фара", "Двигатель", "Глушитель", "Кузов","Спидометр" };
-            TypeOfBreaking = typeOfBreaking[_random.Next(6)];
+            TypeOfBreaking = typeOfBreaking[id];
+        }
+
+        public void DoGood()
+        {
+            IsSuccessful = true;
         }
     }
 
@@ -85,17 +99,14 @@ namespace Lessons
     {
         public int Coast { get; private set; }
         public string Name { get; private set; }
-        private static Random _random;
 
-        public Detail()
+        public Detail(int id)
         {
             string[] baseOfName = { "Колесо", "Кузов", "Капот", "Двигатель", "Фара", "Глушитель", "Коробка передач" };
             int[] baseOfCoast = { 1000, 5000, 2666, 9999, 700, 1600, 7800 };
-            int index;
-            _random = new Random();
-            index = _random.Next(7);
-            Coast = baseOfCoast[index];
-            Name = baseOfName[index];
+            Coast = baseOfCoast[id];
+            Name = baseOfName[id];
         }
+
     }
 }

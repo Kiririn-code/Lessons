@@ -97,10 +97,8 @@ namespace Lessons
     class Detail
     {
         private static Random _random = new Random();
-
         public int Coast { get; private set; }
         public string Name { get; private set; }
-
 
         public Detail()
         { 

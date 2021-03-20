@@ -76,9 +76,9 @@ namespace Lessons
 
     class Client
     {
+        private static Random _random = new Random();
         public string TypeOfBreaking { get; private set; }
         public bool IsSuccessful { get; private set; }
-        private static Random _random = new Random();
 
         public Client()
         {
@@ -96,10 +96,11 @@ namespace Lessons
 
     class Detail
     {
+        private static Random _random = new Random();
+
         public int Coast { get; private set; }
         public string Name { get; private set; }
 
-        private static Random _random = new Random();
 
         public Detail()
         { 

@@ -31,14 +31,12 @@ namespace Lessons
 
             for (int i = 0; i < 10; i++)
             {
-                int id = _random.Next(7);
-                _clients.Enqueue(new Client(id));
+                _clients.Enqueue(new Client());
             }
 
             for (int i = 0; i < 20; i++)
             {
-                int id = _random.Next(7);
-                _details.Add(new Detail(id));
+                _details.Add(new Detail());
             }
         }
 
@@ -59,7 +57,7 @@ namespace Lessons
                         Console.WriteLine($"Деталь под замену - {_details[i].Name}\nЦена за ремонт - {_details[i].Coast+coastOfRepair}\n");
                         _money += _details[i].Coast + coastOfRepair;
                         _details.RemoveAt(i);
-                        currentClient.DoGood();
+                        currentClient.FixTheCar();
                         break;
                     }
                 }
@@ -80,15 +78,17 @@ namespace Lessons
     {
         public string TypeOfBreaking { get; private set; }
         public bool IsSuccessful { get; private set; }
+        private static Random _random = new Random();
 
-        public Client(int id)
+        public Client()
         {
             IsSuccessful = false;
             string[] typeOfBreaking = { "Колесо", "Коробка передач", "Фара", "Двигатель", "Глушитель", "Кузов","Спидометр" };
-            TypeOfBreaking = typeOfBreaking[id];
+            int index = _random.Next(typeOfBreaking.Length);
+            TypeOfBreaking = typeOfBreaking[index];
         }
 
-        public void DoGood()
+        public void FixTheCar()
         {
             IsSuccessful = true;
         }
@@ -99,12 +99,15 @@ namespace Lessons
         public int Coast { get; private set; }
         public string Name { get; private set; }
 
-        public Detail(int id)
-        {
+        private static Random _random = new Random();
+
+        public Detail()
+        { 
             string[] baseOfName = { "Колесо", "Кузов", "Капот", "Двигатель", "Фара", "Глушитель", "Коробка передач" };
+            int index = _random.Next(baseOfName.Length);
             int[] baseOfCoast = { 1000, 5000, 2666, 9999, 700, 1600, 7800 };
-            Coast = baseOfCoast[id];
-            Name = baseOfName[id];
+            Coast = baseOfCoast[index];
+            Name = baseOfName[index];
         }
     }
 }

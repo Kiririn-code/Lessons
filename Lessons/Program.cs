@@ -20,23 +20,28 @@ namespace Lessons
         private Queue<Client> _clients;
         private List<Detail> _details;
         private int _money;
-        private static Random _random;
+        private Random _random;
 
         public WorkStation()
         {
-            _money = 10000;
+            _money = 5000;
             _clients = new Queue<Client>();
             _details = new List<Detail>();
             _random = new Random();
+            string[] baseOfName = { "Колесо", "Кузов", "Капот", "Двигатель", "Фара", "Глушитель", "Коробка передач" };
+            int[] baseOfCoast = { 1000, 5000, 2666, 9999, 700, 1600, 7800 };
+
 
             for (int i = 0; i < 10; i++)
             {
-                _clients.Enqueue(new Client());
+                int detail = _random.Next(baseOfName.Length);
+                _clients.Enqueue(new Client(baseOfName[detail]));
             }
 
             for (int i = 0; i < 20; i++)
             {
-                _details.Add(new Detail());
+                int detail = _random.Next(baseOfName.Length);
+                _details.Add(new Detail(baseOfCoast[detail], baseOfName[detail]));
             }
         }
 
@@ -76,16 +81,14 @@ namespace Lessons
 
     class Client
     {
-        private static Random _random = new Random();
         public string TypeOfBreaking { get; private set; }
         public bool IsSuccessful { get; private set; }
 
-        public Client()
+        public Client(string tupeOfBreacing)
         {
             IsSuccessful = false;
-            string[] typeOfBreaking = { "Колесо", "Коробка передач", "Фара", "Двигатель", "Глушитель", "Кузов","Спидометр" };
-            int index = _random.Next(typeOfBreaking.Length);
-            TypeOfBreaking = typeOfBreaking[index];
+            
+            TypeOfBreaking = tupeOfBreacing;
         }
 
         public void FixTheCar()
@@ -96,17 +99,13 @@ namespace Lessons
 
     class Detail
     {
-        private static Random _random = new Random();
         public int Coast { get; private set; }
         public string Name { get; private set; }
 
-        public Detail()
+        public Detail(int coast, string name)
         { 
-            string[] baseOfName = { "Колесо", "Кузов", "Капот", "Двигатель", "Фара", "Глушитель", "Коробка передач" };
-            int index = _random.Next(baseOfName.Length);
-            int[] baseOfCoast = { 1000, 5000, 2666, 9999, 700, 1600, 7800 };
-            Coast = baseOfCoast[index];
-            Name = baseOfName[index];
+            Coast = coast;
+            Name = name;
         }
     }
 }

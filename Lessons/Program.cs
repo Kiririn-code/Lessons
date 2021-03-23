@@ -61,14 +61,11 @@ namespace Lessons
                     if(_details[i].Name == currentClient.TypeOfBreaking)
                     {
                         // Console.WriteLine($"Деталь под замену - {_details[i].Name}\nЦена за ремонт - {_details[i].Coast+coastOfRepair}\n");
-                        if (random.Next(6) == 0)
+                        if (random.Next(6) == 0 && _details[i].Name != _details[i + 1].Name)
                         {
-                            if (_details[i].Name != _details[i + 1].Name)
-                            {
-                                Console.WriteLine($"Деталь под замену - {_details[i + 1].Name}\nЦена за ремонт - {_details[i].Coast + coastOfRepair}\n");
-                                _details.RemoveAt(i + 1);
-                                currentClient.DoFault();
-                            }
+                            Console.WriteLine($"Деталь под замену - {_details[i + 1].Name}\nЦена за ремонт - {_details[i].Coast + coastOfRepair}\n");
+                            _details.RemoveAt(i + 1);
+                            currentClient.DoFault();
                         }
                         else
                         {

@@ -32,13 +32,13 @@ namespace Lessons
             int[] baseOfCoast = { 1000, 5000, 2666, 9999, 700, 1600, 7800 };
 
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 int detail = _random.Next(baseOfName.Length);
                 _clients.Enqueue(new Client(baseOfName[detail]));
             }
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 200; i++)
             {
                 int detail = _random.Next(baseOfName.Length);
                 _details.Add(new Detail(baseOfCoast[detail], baseOfName[detail]));
@@ -47,11 +47,12 @@ namespace Lessons
 
         public void DoWork()
         {
-            int fine = 1000;
+            int fine = 5000;
             int coastOfRepair = 2000;
 
             while(_clients.Count > 0)
             {
+                Random random = new Random();
                 var currentClient = _clients.Dequeue();
                 Console.WriteLine($"Кажется у нас гости. Неисправность клиента - {currentClient.TypeOfBreaking}");
 
@@ -59,10 +60,23 @@ namespace Lessons
                 {
                     if(_details[i].Name == currentClient.TypeOfBreaking)
                     {
-                        Console.WriteLine($"Деталь под замену - {_details[i].Name}\nЦена за ремонт - {_details[i].Coast+coastOfRepair}\n");
-                        _money += _details[i].Coast + coastOfRepair;
-                        _details.RemoveAt(i);
-                        currentClient.FixTheCar();
+                        // Console.WriteLine($"Деталь под замену - {_details[i].Name}\nЦена за ремонт - {_details[i].Coast+coastOfRepair}\n");
+                        if (random.Next(6) == 0)
+                        {
+                            if (_details[i].Name != _details[i + 1].Name)
+                            {
+                                Console.WriteLine($"Деталь под замену - {_details[i + 1].Name}\nЦена за ремонт - {_details[i].Coast + coastOfRepair}\n");
+                                _details.RemoveAt(i + 1);
+                                currentClient.DoFault();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Деталь под замену - {_details[i].Name}\nЦена за ремонт - {_details[i].Coast + coastOfRepair}\n");
+                            _money += _details[i].Coast + coastOfRepair;
+                            _details.RemoveAt(i);
+                            currentClient.FixTheCar();
+                        }
                         break;
                     }
                 }
@@ -70,19 +84,26 @@ namespace Lessons
                 {
                     Console.WriteLine($"Ремонт успешно оплачен\nСчет мастерской пополнен\nБаланс:{_money}\n");
                 }
-                else
+                else if (currentClient.IsFault)
+                {
+                    _money -= fine;
+                    Console.WriteLine($"О, нет, кажется мы заменили не ту деталь, придется возместить убытки\nБаланс:{_money}\n");
+                }  
+                else 
                 {
                     _money -= fine;
                     Console.WriteLine($"Похоже на нашем складе нет нужной запчасти\nпридется выплатить штраф\nБаланс:{_money}\n");
                 }
             }
         }
+
     }
 
     class Client
     {
         public string TypeOfBreaking { get; private set; }
         public bool IsSuccessful { get; private set; }
+        public bool IsFault { get; private set; }
 
         public Client(string tupeOfBreacing)
         {
@@ -94,6 +115,11 @@ namespace Lessons
         public void FixTheCar()
         {
             IsSuccessful = true;
+        }
+
+        public void DoFault()
+        {
+            IsFault = true;
         }
     }
 
